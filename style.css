@@ -1,0 +1,24 @@
+
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Create three equal columns that floats next to each other */
+.column {
+    border: 1px solid black;
+    float: left;
+    margin: 5px;
+    padding: 10px;
+    width: 30%;
+  }
+  
+  /* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+.userInput {
+      text-align: center;
+  }
