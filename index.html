@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="./normalize.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Cocktail Creator</title>
     </head>
 <body>
@@ -15,10 +16,11 @@
 <h2><em>What can you make with what you have?</em></h2>
 <!--User inputs ingredients here-->
 <div class="row userInput">
-    <form>
+
         Ingredient:
-        <input type="text" name="userIngredient"><br>
-    </form>
+        <input id="userIngredient" type="text"><br>
+        <button id="searchBtn">"Drink Up!"</button>
+
 </div>
 <div class="row">
   <div class="inputWrapper">
