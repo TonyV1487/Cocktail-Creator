@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./normalize.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <title>Cocktail Creator</title>
-  </head>
-  <body></body>
+    </head>
+<body>
+<!--Do we want a navigation bar?-->
+<!--Header-->
+<h1>Cocktail Creator</h2>
+<h2><em>What can you make with what you have?</em></h2>
+<!--User inputs ingredients here-->
+<div class="row userInput">
+    <form>
+        Ingredient:
+        <input type="text" name="userIngredient"><br>
+    </form>
+</div>
+<div class="row">
+  <div class="inputWrapper">
+    <div class="column" style="background-color:#aaa;">
+      <h2>What do you have?</h2>
+      <input type="checkbox">Vodka<br>
+      <input type="checkbox">Whiskey<br>
+      <input type="checkbox">Gin<br>
+    </div>
+  </div>
+<!--Cocktail recipes pop up here-->
+  <div class="suggestWrapper">
+    <div class="column" style="background-color:#bbb;">
+      <h2>Drinks you can make:</h2>
+      <p>Suggestions listed here</p>
+    </div>
+  </div>
+<!--More ingredients for more drinks here-->
+  <div class="moreIngredientsWrapper">
+    <div class="column" style="background-color:#ccc;">
+      <h2>What you could make:</h2>
+      <p>More ingredients listed here</p>
+    </div>
+  </div>
+</div>
+
+</body>
 </html>
