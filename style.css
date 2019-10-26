@@ -1,24 +1,52 @@
-
 * {
-    box-sizing: border-box;
-  }
-  
-  /* Create three equal columns that floats next to each other */
+  box-sizing: border-box;
+}
+
+/* Create three equal columns that floats next to each other */
 .column {
-    border: 1px solid black;
-    float: left;
-    margin: 5px;
-    padding: 10px;
-    width: 30%;
-  }
-  
-  /* Clear floats after the columns */
+  border: 1px solid black;
+  float: left;
+  margin: 5px;
+  padding: 10px;
+  width: 30%;
+}
+
+/* Clear floats after the columns */
 .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+  content: '';
+  display: table;
+  clear: both;
+}
 
 .userInput {
-      text-align: center;
-  }
+  text-align: center;
+}
+
+/* Tree */
+.caret {
+  cursor: pointer;
+  user-select: none; /* Prevent text selection */
+}
+
+/* Create the caret/arrow with a unicode, and style it */
+.caret::before {
+  content: '\25B6';
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+.caret-down::before {
+  transform: rotate(90deg);
+}
+
+/* Hide the nested list */
+.nested {
+  display: none;
+}
+
+/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+.active {
+  display: block;
+}
