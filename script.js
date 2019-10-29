@@ -279,7 +279,7 @@ $(document).ready(function() {
     'Averna',
     'Bacardi Limon',
     'Bacardi',
-    'Bailey\'s Irish Cream',
+    "Bailey's Irish Cream",
     'Banana Liquor',
     'Banana Rum',
     'Barenjager',
@@ -365,7 +365,7 @@ $(document).ready(function() {
     'Honey',
     'Ilegal Joven mezcal',
     'Islay single malt Scotch',
-    'Irish cream', 
+    'Irish cream',
     'Irish Whiskey',
     'Jack Daniels',
     'Jagermeister',
@@ -471,14 +471,60 @@ $(document).ready(function() {
   function displayLiquor() {
     for (i = 0; i < liquorList.length; i++) {
       var liquorItem = liquorList[i];
-      $('#liquor').append(`<input type="checkbox">${liquorItem}<br>`);
+      $('#liquor').append(
+        `<li><input type="checkbox"><a>${liquorItem}</a></li>`
+      );
     }
   }
 
   function displayIngredients() {
     for (i = 0; i < ingredientList.length; i++) {
       var ingredientItem = ingredientList[i];
-      $('#ingredients').append(`<input type="checkbox">${ingredientItem}<br>`);
+      $('#ingredients').append(
+        `<li><input type="checkbox"><a>${ingredientItem}</a></li>`
+      );
+    }
+  }
+
+  // Run the filter functions as you type ingredients in the search bar
+  $('#userIngredient').keyup(function() {
+    myLiquorFunction();
+    myIngredientFunction();
+  });
+
+  // Filter the liquor list based on your input in the search bar
+  function myLiquorFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('userIngredient');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById('liquor');
+    li = ul.getElementsByTagName('li');
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName('a')[0];
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = '';
+      } else {
+        li[i].style.display = 'none';
+      }
+    }
+  }
+
+  // Filter the ingredient list as you input text in the search bar
+  function myIngredientFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('userIngredient');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById('ingredients');
+    li = ul.getElementsByTagName('li');
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName('a')[0];
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = '';
+      } else {
+        li[i].style.display = 'none';
+      }
     }
   }
 
@@ -530,23 +576,23 @@ $(document).ready(function() {
               response.drinks[0].strIngredient15
             ];
             // Creates an element to have the drink image displayed
-            var drinkImageDiv = $("<img>")
-              .attr("src", response.drinks[0].strDrinkThumb)
+            var drinkImageDiv = $('<img>')
+              .attr('src', response.drinks[0].strDrinkThumb)
               .width(300);
-            var drinkIngredientDiv = $("<ul>");
+            var drinkIngredientDiv = $('<ul>');
             ingredientArray.forEach(ingredient => {
               if (ingredient !== null) {
-                var ingredientDiv = $("<li>");
+                var ingredientDiv = $('<li>');
                 ingredientDiv.html(ingredient);
                 drinkIngredientDiv.append(ingredientDiv);
               }
             });
-            var drinkInstructionsDiv = $("<div>").html(
+            var drinkInstructionsDiv = $('<div>').html(
               response.drinks[0].strInstructions
             );
 
             // Displays the drink image
-            $("#drinkDisplay")
+            $('#drinkDisplay')
               .append(drinkImageDiv)
               .append(drinkIngredientDiv)
               .append(drinkInstructionsDiv);

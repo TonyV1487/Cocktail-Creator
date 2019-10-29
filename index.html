@@ -17,8 +17,8 @@
 <!--User inputs ingredients here-->
 <div class="row userInput">
 
-        Ingredient:
-        <input id="userIngredient" type="text"><br>
+        
+        <input id="userIngredient" type="text" placeholder="Search for ingredient.." title="Type in an ingredient">
         <button id="searchBtn">"Drink Up!"</button>
 
 </div>
@@ -28,12 +28,12 @@
       <h2>What do you have?</h2>
       <div class="row">
           <h4 class="caret">Liquors</h4>
-          <div class="nested" id="liquor"></div>
+          <ul class="nested" id="liquor" style="list-style-type:none"></ul>
         
       </div>
       <div class="row">
         <h4 class="caret">Ingredients</h4>
-        <div class="nested" id="ingredients"></div>
+        <ul class="nested" id="ingredients" style="list-style-type:none"></ul>
       
     </div>
     </div>
