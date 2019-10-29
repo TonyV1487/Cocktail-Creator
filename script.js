@@ -487,9 +487,15 @@ $(document).ready(function() {
   }
 
   // Run the filter functions as you type ingredients in the search bar
-  $('#userIngredient').keyup(function() {
-    myLiquorFunction();
-    myIngredientFunction();
+  $('#userIngredient').keyup(function(e) {
+    if (e.keyCode === 13) {
+      var ingredient = $('#userIngredient').val();
+      searchDrink(ingredient);
+      $('#userIngredient').val('');
+    } else {
+      myLiquorFunction();
+      myIngredientFunction();
+    }
   });
 
   // Filter the liquor list based on your input in the search bar
@@ -604,8 +610,8 @@ $(document).ready(function() {
 
   $('#searchBtn').on('click', function() {
     var ingredient = $('#userIngredient').val();
-
     searchDrink(ingredient);
+    $('#userIngredient').val('');
   });
   displayLiquor();
   displayIngredients();
