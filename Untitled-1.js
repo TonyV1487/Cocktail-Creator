@@ -1,21 +1,4 @@
 $(document).ready(function() {
-  //var item = localStorage.getItem("vrum");
-  //console.log(item);
-
-  //create local storage variable
-  var saveCocktailBtn = document.getElementById("saveCocktailBtn");
-  saveCocktailBtn.addEventListener("click", saveCocktailToStorage);
-
-  //create local storage function
-  function saveCocktailToStorage() {
-    var cocktailName = document.getElementById("cocktailName").value;
-    localStorage.setItem(cocktailName, JSON.stringify(drinks));
-    console.log("Saving cocktail " + cocktailName);
-    console.log(JSON.stringify(drinks));
-  }
-  //needed to create array to tie "what do you havve" to "drinks you can make"
-  var ingredientArray = [];
-  //list of incredients array
   var ingredientList = [
     "Sweet Vermouth",
     "Orange bitters",
@@ -67,7 +50,6 @@ $(document).ready(function() {
     "Sprite",
     "7-Up"
   ];
-  //list of liquors array
   var liquorList = [
     "Light rum",
     "Applejack",
@@ -124,8 +106,10 @@ $(document).ready(function() {
     "Jack Daniels"
   ];
 
-  //variable to have "drink up" moved to userChoice div
-  var drinks = "";
+  function searchField() {
+    var searchResults = document.getElementById("search").value;
+    document.writeln("search");
+  }
 
   function displayLiquor() {
     for (i = 0; i < liquorList.length; i++) {
@@ -150,10 +134,8 @@ $(document).ready(function() {
       url: ingredientUrl,
       method: "GET"
     }).then(function(response) {
-      //console.log(response);
-      document.getElementById("drinkList").innerHTML = "";
-      //had to move var drinks to a global variable
-      drinks = response.drinks;
+      console.log(response);
+      var drinks = response.drinks;
       for (var i = 0; i < drinks.length; i++) {
         var drinkTitle = drinks[i].strDrink;
         // Creates an element to have the drink title displayed
@@ -175,7 +157,7 @@ $(document).ready(function() {
             console.log(response);
             for (var i = 1; i < 15; i++) {
               var drinkIng = `strIngredient${i}`;
-              //alert(response.drinks[0][drinkIng]);
+              alert(response.drinks[0][drinkIng]);
             }
           });
         });
@@ -187,92 +169,13 @@ $(document).ready(function() {
     });
   }
 
-  //pushes user choice to new div I created to display in "What do you have"
   $("#searchBtn").on("click", function() {
     var ingredient = $("#userIngredient").val();
-    if (ingredient != "") {
-      ingredientArray.push(ingredient);
 
-      var userChoice = document.getElementById("userChoice");
-      var userChoiceHtml = document.createElement("DIV");
-      //google fu said to use .id to solve error I was having
-      userChoiceHtml.id = ingredient + "_choice";
-      userChoice.appendChild(userChoiceHtml);
-
-      //needed to create label variable to have choice appear in div
-      var choiceLabel = document.createElement("LABEL");
-      choiceLabel.innerText = ingredient;
-      userChoiceHtml.appendChild(choiceLabel);
-
-      /*
-      var userChoiceHtml = '<div id="' + ingredient + '_choice">';
-      userChoiceHtml += "<label>" + ingredient + "</label>";
-      
-      userChoiceHtml +=
-        '<button id="' +
-        ingredient +
-        '_del" value="' +
-        ingredient +
-        '" onclick="deleteChoice(this.value)">del</button>';
-      userChoiceHtml += "</div>";
-      */
-
-      //userChoice.innerHTML += userChoiceHtml;
-
-      //variable to create delete button
-      var btn = document.createElement("BUTTON");
-      //had to change from innerHTML to innerText to get more than one delete button to work
-      btn.innerText = "Del";
-      btn.value = ingredient;
-      btn.id = ingredient + "_del";
-      //addEventListener is only deleting buttons that are last added.
-      btn.addEventListener("click", deleteChoice);
-      userChoiceHtml.appendChild(btn);
-
-      //searchDrink(ingredient);
-    }
-    //created array to reduce drink choices when more liquors and ingredients are selected
-    var ingredients = "";
-
-    //for loop to reduce drink choices provided by array as more ingredients are entered
-    for (i = 0; i < ingredientArray.length; i++) {
-      ingredients += ingredientArray[i];
-      if (i < ingredientArray.length - 1) {
-        ingredients += ",";
-      }
-    }
-    console.log(ingredients);
-
-    searchDrink(ingredients);
+    searchDrink(ingredient);
   });
   displayLiquor();
   displayIngredients();
-
-  //created function to have the ability to delete selected ingredients
-  function deleteChoice(event) {
-    //console.log(event.target.value);
-    //var delBtnId = event.target.id; NOTE: this is not working.
-    //stack overflow said to create event.target.value to identify object that led to event.
-    var delBtnValue = event.target.value;
-    document.getElementById(delBtnValue + "_choice").remove();
-    event.target.remove();
-
-    //NOTE: tutor recommended that I use indexOf and splice the index to get my for loop to work
-    var index = ingredientArray.indexOf(delBtnValue);
-    if (index > -1) {
-      ingredientArray.splice(index, 1);
-    }
-
-    var ingredients = "";
-
-    for (i = 0; i < ingredientArray.length; i++) {
-      ingredients += ingredientArray[i];
-      if (i < ingredientArray.length - 1) {
-        ingredients += ",";
-      }
-    }
-    searchDrink(ingredients);
-  }
 
   // Caret
   var toggler = document.getElementsByClassName("caret");

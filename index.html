@@ -19,13 +19,20 @@
 
         Ingredient:
         <input id="userIngredient" type="text"><br>
-        <button id="searchBtn">"Drink Up!"</button>
+        <button id="searchBtn">"Drink Up!"</button><br><br>
+        <hr>
+        <!--added save cocktail button for local storage-->
+        <input id="cocktailName" type="text">
+        <button id="saveCocktailBtn">Save Cocktail</button>
 
 </div>
 <div class="row">
   <div class="inputWrapper">
     <div class="column" id="myUL"style="background-color:#aaa;">
       <h2>What do you have?</h2>
+      <div id="userChoice">
+
+      </div>
       <div class="row">
           <h4 class="caret">Liquors</h4>
           <div class="nested" id="liquor"></div>
