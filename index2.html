@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./normalize.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Cocktail Creator</title>
+    </head>
+<body>
+<!--Do we want a navigation bar?-->
+<!--Header-->
+<h1>Cocktail Creator</h2>
+<h2><em>What can you make with what you have?</em></h2>
+<!--User inputs ingredients here-->
+<div class="row userInput">
+
+        Ingredient:
+        <input id="userIngredient" type="text"><br>
+        <button id="searchBtn">"Drink Up!"</button>
+
+</div>
+<div class="row">
+  <div class="inputWrapper">
+    <div class="column" id="myUL"style="background-color:#aaa;">
+      <h2>What do you have?</h2>
+      <div class="row">
+          <h4 class="caret">Liquors</h4>
+          <div class="nested" id="liquor"></div>
+        
+      </div>
+      <div class="row">
+        <h4 class="caret">Ingredients</h4>
+        <div class="nested" id="ingredients"></div>
+      
+    </div>
+    </div>
+  </div>
+<!--Cocktail recipes pop up here-->
+  <div class="suggestWrapper">
+    <div class="column" style="background-color:#bbb;">
+      <h2>Drinks you can make:</h2>
+      <p id="drinkList">Suggestions listed here</p>
+    </div>
+  </div>
+<!--More ingredients for more drinks here-->
+  <div class="moreIngredientsWrapper">
+    <div class="column" style="background-color:#ccc;">
+      <h2>What you could make:</h2>
+      <p id="drinkDisplay">More ingredients listed here</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
