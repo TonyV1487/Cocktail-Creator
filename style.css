@@ -2,6 +2,13 @@
   box-sizing: border-box;
 }
 
+/* Remove margins around h4 and ul tags */
+h4,
+ul {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+}
+
 /* Create three equal columns that floats next to each other */
 .column {
   border: 1px solid black;
