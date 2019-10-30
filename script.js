@@ -572,6 +572,7 @@ $(document).ready(function() {
         var drinkTitle = drinks[i].strDrink;
         // Creates an element to have the drink title displayed
         var drinkTitleDiv = $("<button>")
+          .addClass("displayBtn")
           .html(`${drinkTitle}`)
           .val(drinkTitle);
         // Displays the drink title
@@ -587,38 +588,36 @@ $(document).ready(function() {
             method: "GET"
           }).then(function(response) {
             console.log(response);
-            var ingredientArray = [
-              response.drinks[0].strIngredient1,
-              response.drinks[0].strIngredient2,
-              response.drinks[0].strIngredient3,
-              response.drinks[0].strIngredient4,
-              response.drinks[0].strIngredient5,
-              response.drinks[0].strIngredient6,
-              response.drinks[0].strIngredient7,
-              response.drinks[0].strIngredient8,
-              response.drinks[0].strIngredient9,
-              response.drinks[0].strIngredient10,
-              response.drinks[0].strIngredient11,
-              response.drinks[0].strIngredient12,
-              response.drinks[0].strIngredient13,
-              response.drinks[0].strIngredient14,
-              response.drinks[0].strIngredient15
-            ];
+            var ingrArray = [];
+            for (i = 1; i < 16; i++) {
+              var measIngr = {
+                ingredient: response.drinks[0][`strIngredient${i}`],
+                measurement: response.drinks[0][`strMeasure${i}`]
+              };
+              ingrArray.push(measIngr);
+            }
+
             // Creates an element to have the drink image displayed
             var drinkImageDiv = $("<img>")
+              .addClass("drinkImgClass")
               .attr("src", response.drinks[0].strDrinkThumb)
               .width(300);
-            var drinkIngredientDiv = $("<ul>");
-            ingredientArray.forEach(ingredient => {
-              if (ingredient !== null) {
+            var drinkIngredientDiv = $("<ul>").addClass("drinkIngClass");
+            ingrArray.forEach(ingredient => {
+              if (ingredient.ingredient !== null) {
                 var ingredientDiv = $("<li>");
-                ingredientDiv.html(ingredient);
+                var measurement =
+                  ingredient.measurement === null
+                    ? ""
+                    : ingredient.measurement + " of ";
+
+                ingredientDiv.html(`${measurement}${ingredient.ingredient}`);
                 drinkIngredientDiv.append(ingredientDiv);
               }
             });
-            var drinkInstructionsDiv = $("<div>").html(
-              response.drinks[0].strInstructions
-            );
+            var drinkInstructionsDiv = $("<div>")
+              .addClass("drinkInstClass")
+              .html(response.drinks[0].strInstructions);
 
             // Displays the drink image
             $("#drinkDisplay")

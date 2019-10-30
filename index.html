@@ -7,13 +7,14 @@
     <link rel="stylesheet" type="text/css" href="./normalize.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
     <title>Cocktail Creator</title>
     </head>
-<body>
+<body class="body">
 <!--Do we want a navigation bar?-->
 <!--Header-->
-<h1>Cocktail Creator</h2>
-<h2><em>What can you make with what you have?</em></h2>
+<h1 class="headline1">Cocktail Creator</h2>
+<h2 class="headline2"><em>What can you make with what you have?</em></h2>
 <!--User inputs ingredients here-->
 <div class="row userInput">
 
@@ -50,15 +51,15 @@
 <!--Cocktail recipes pop up here-->
   <div class="suggestWrapper">
     <div class="column" style="background-color:#bbb;">
-      <h2>Drinks you can make:</h2>
-      <p id="drinkList">Suggestions listed here</p>
+      <h2 class="headline2">Drinks you can make:</h2>
+      <p id="drinkList"></p>
     </div>
   </div>
 <!--More ingredients for more drinks here-->
   <div class="moreIngredientsWrapper">
     <div class="column" style="background-color:#ccc;">
-      <h2>What you could make:</h2>
-      <p id="drinkDisplay">More ingredients listed here</p>
+      <h2 class="headline2">Here's the recipe:</h2>
+      <p id="drinkDisplay"></p>
     </div>
   </div>
 </div>
