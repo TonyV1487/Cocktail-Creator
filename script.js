@@ -570,18 +570,16 @@ $(document).ready(function() {
       //had to move var drinks to a global variable
       drinks = response.drinks;
       for (var i = 0; i < drinks.length; i++) {
-
         var drinkBtn = drinks[i].strDrink;
         // Creates an element to have the drink Button displayed
-        var drinkBtnDiv = $("<button>")
-          .addClass("displayBtn")
+        var drinkBtnDiv = $('<button>')
+          .addClass('displayBtn')
           .html(`${drinkBtn}`)
           .val(drinkBtn);
         // Displays the drink Button
-        $("#drinkList").append(drinkBtnDiv);
+        $('#drinkList').append(drinkBtnDiv);
         //Displays drink after clicking the cocktail name
-        $(drinkBtnDiv).on("click", function() {
-
+        $(drinkBtnDiv).on('click', function() {
           console.log($(this).val());
           var cocktailName = $(this).val();
           var recipeUrl =
@@ -624,8 +622,8 @@ $(document).ready(function() {
               .addClass('drinkInstClass')
               .html(response.drinks[0].strInstructions);
 
-            var drinkTitleDiv = $("<div>")
-              .addClass("drinkInstClass")
+            var drinkTitleDiv = $('<div>')
+              .addClass('drinkInstClass')
               .html(response.drinks[0].strDrink);
 
             // Displays the drink image, recipe, and instructions
@@ -646,13 +644,18 @@ $(document).ready(function() {
   }
 
   //pushes user choice to new div I created to display in "What do you have"
- $('#searchBtn').on('click', function() {
+  $('#searchBtn').on('click', function() {
     appendIngredientChoice();
+    saveCocktailToStorage();
   });
   function appendIngredientChoice() {
     var ingredient = $('#userIngredient').val();
-    if (ingredient != '') {
-
+    console.log(ingredient);
+    var ingredientUpCase = ingredient.toUpperCase();
+    if (
+      (ingredient != '' && liquorList.indexOf(ingredient) > -1) ||
+      (ingredient != '' && ingredientList.indexOf(ingredient) > -1)
+    ) {
       ingredientArray.push(ingredient);
 
       var userChoice = document.getElementById('userChoice');
@@ -692,6 +695,10 @@ $(document).ready(function() {
       userChoiceHtml.appendChild(btn);
 
       //searchDrink(ingredient);
+    } else {
+      alert(
+        'Not an available value or incorrectly capitalized. Try choosing from the checklist.'
+      );
     }
     //created array to reduce drink choices when more liquors and ingredients are selected
     var ingredients = '';
