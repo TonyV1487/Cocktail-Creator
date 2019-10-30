@@ -570,16 +570,18 @@ $(document).ready(function() {
       //had to move var drinks to a global variable
       drinks = response.drinks;
       for (var i = 0; i < drinks.length; i++) {
-        var drinkTitle = drinks[i].strDrink;
-        // Creates an element to have the drink title displayed
-        var drinkTitleDiv = $('<button>')
-          .addClass('displayBtn')
-          .html(`${drinkTitle}`)
-          .val(drinkTitle);
-        // Displays the drink title
-        $('#drinkList').append(drinkTitleDiv);
+
+        var drinkBtn = drinks[i].strDrink;
+        // Creates an element to have the drink Button displayed
+        var drinkBtnDiv = $("<button>")
+          .addClass("displayBtn")
+          .html(`${drinkBtn}`)
+          .val(drinkBtn);
+        // Displays the drink Button
+        $("#drinkList").append(drinkBtnDiv);
         //Displays drink after clicking the cocktail name
-        $(drinkTitleDiv).on('click', function() {
+        $(drinkBtnDiv).on("click", function() {
+
           console.log($(this).val());
           var cocktailName = $(this).val();
           var recipeUrl =
@@ -622,9 +624,14 @@ $(document).ready(function() {
               .addClass('drinkInstClass')
               .html(response.drinks[0].strInstructions);
 
+            var drinkTitleDiv = $("<div>")
+              .addClass("drinkInstClass")
+              .html(response.drinks[0].strDrink);
+
             // Displays the drink image, recipe, and instructions
             $('#drinkDisplay')
               .empty()
+              .append(drinkTitleDiv)
               .append(drinkImageDiv)
               .append(drinkIngredientDiv)
               .append(drinkInstructionsDiv);
@@ -639,12 +646,13 @@ $(document).ready(function() {
   }
 
   //pushes user choice to new div I created to display in "What do you have"
-  $('#searchBtn').on('click', function() {
+ $('#searchBtn').on('click', function() {
     appendIngredientChoice();
   });
   function appendIngredientChoice() {
     var ingredient = $('#userIngredient').val();
     if (ingredient != '') {
+
       ingredientArray.push(ingredient);
 
       var userChoice = document.getElementById('userChoice');
