@@ -578,6 +578,7 @@ $(document).ready(function() {
           .val(drinkTitle);
         // Displays the drink title
         $('#drinkList').append(drinkTitleDiv);
+        //Displays drink after clicking the cocktail name
         $(drinkTitleDiv).on('click', function() {
           console.log($(this).val());
           var cocktailName = $(this).val();
@@ -610,18 +611,20 @@ $(document).ready(function() {
                 var measurement =
                   ingredient.measurement === null
                     ? ''
-                    : ingredient.measurement + ' of ';
-
+                    : ingredient.measurement + ' : ';
+                // appends the drink recipe
                 ingredientDiv.html(`${measurement}${ingredient.ingredient}`);
                 drinkIngredientDiv.append(ingredientDiv);
               }
             });
+
             var drinkInstructionsDiv = $('<div>')
               .addClass('drinkInstClass')
               .html(response.drinks[0].strInstructions);
 
-            // Displays the drink image
+            // Displays the drink image, recipe, and instructions
             $('#drinkDisplay')
+              .empty()
               .append(drinkImageDiv)
               .append(drinkIngredientDiv)
               .append(drinkInstructionsDiv);
