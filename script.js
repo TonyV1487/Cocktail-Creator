@@ -548,11 +548,13 @@ $(document).ready(function() {
       for (var i = 0; i < drinks.length; i++) {
         var drinkTitle = drinks[i].strDrink;
         // Creates an element to have the drink title displayed
-        var drinkTitleDiv = $("<button>").addClass('displayBtn')
+        var drinkTitleDiv = $("<button>")
+          .addClass("displayBtn")
           .html(`${drinkTitle}`)
           .val(drinkTitle);
         // Displays the drink title
         $("#drinkList").append(drinkTitleDiv);
+        //Displays drink after clicking the cocktail name
         $(drinkTitleDiv).on("click", function() {
           console.log($(this).val());
           var cocktailName = $(this).val();
@@ -574,28 +576,32 @@ $(document).ready(function() {
             }
 
             // Creates an element to have the drink image displayed
-            var drinkImageDiv = $("<img>").addClass('drinkImgClass')
+            var drinkImageDiv = $("<img>")
+              .addClass("drinkImgClass")
               .attr("src", response.drinks[0].strDrinkThumb)
               .width(300);
-            var drinkIngredientDiv = $("<ul>").addClass('drinkIngClass');
+            // creates drink recipe
+            var drinkIngredientDiv = $("<ul>").addClass("drinkIngClass");
             ingrArray.forEach(ingredient => {
               if (ingredient.ingredient !== null) {
                 var ingredientDiv = $("<li>");
                 var measurement =
                   ingredient.measurement === null
                     ? ""
-                    : ingredient.measurement + " of ";
-
+                    : ingredient.measurement + " : ";
+                // appends the drink recipe
                 ingredientDiv.html(`${measurement}${ingredient.ingredient}`);
                 drinkIngredientDiv.append(ingredientDiv);
               }
             });
-            var drinkInstructionsDiv = $("<div>").addClass('drinkInstClass').html(
-              response.drinks[0].strInstructions
-            );
+            // creates the drink instructions
+            var drinkInstructionsDiv = $("<div>")
+              .addClass("drinkInstClass")
+              .html(response.drinks[0].strInstructions);
 
-            // Displays the drink image
+            // Displays the drink image, recipe, and instructions
             $("#drinkDisplay")
+              .empty()
               .append(drinkImageDiv)
               .append(drinkIngredientDiv)
               .append(drinkInstructionsDiv);
