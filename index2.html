@@ -7,43 +7,33 @@
     <link rel="stylesheet" type="text/css" href="./normalize.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
     <title>Cocktail Creator</title>
     </head>
-<body class="body">
+<body>
 <!--Do we want a navigation bar?-->
 <!--Header-->
-<h1 class="headline1">Cocktail Creator</h2>
-<h2 class="headline2"><em>What can you make with what you have?</em></h2>
+<h1>Cocktail Creator</h2>
+<h2><em>What can you make with what you have?</em></h2>
 <!--User inputs ingredients here-->
 <div class="row userInput">
 
         Ingredient:
-        <input id="userIngredient" type="text" placeholder="Search for ingredient.." title="Type in an ingredient">
+        <input id="userIngredient" type="text"><br>
         <button id="searchBtn">"Drink Up!"</button>
-        <hr>
-        <!--added save cocktail button for local storage-->
-        <input id="cocktailName" type="text">
-        <button id="saveCocktailBtn">Save Cocktail</button>
-        
-      
 
 </div>
 <div class="row">
   <div class="inputWrapper">
     <div class="column" id="myUL"style="background-color:#aaa;">
       <h2>What do you have?</h2>
-      <div id="userChoice">
-
-      </div>
       <div class="row">
           <h4 class="caret">Liquors</h4>
-          <ul class="nested" id="liquor" style="list-style-type:none"></ul>
+          <div class="nested" id="liquor"></div>
         
       </div>
       <div class="row">
         <h4 class="caret">Ingredients</h4>
-        <ul class="nested" id="ingredients" style="list-style-type:none"></ul>
+        <div class="nested" id="ingredients"></div>
       
     </div>
     </div>
@@ -51,15 +41,15 @@
 <!--Cocktail recipes pop up here-->
   <div class="suggestWrapper">
     <div class="column" style="background-color:#bbb;">
-      <h2 class="headline2">Drinks you can make:</h2>
-      <p id="drinkList"></p>
+      <h2>Drinks you can make:</h2>
+      <p id="drinkList">Suggestions listed here</p>
     </div>
   </div>
 <!--More ingredients for more drinks here-->
   <div class="moreIngredientsWrapper">
     <div class="column" style="background-color:#ccc;">
-      <h2 class="headline2">Here's the recipe:</h2>
-      <p id="drinkDisplay"></p>
+      <h2>What you could make:</h2>
+      <p id="drinkDisplay">More ingredients listed here</p>
     </div>
   </div>
 </div>
