@@ -18,12 +18,14 @@
 <div class="row userInput">
 
         Ingredient:
-        <input id="userIngredient" type="text"><br>
-        <button id="searchBtn">"Drink Up!"</button><br><br>
+        <input id="userIngredient" type="text" placeholder="Search for ingredient.." title="Type in an ingredient">
+        <button id="searchBtn">"Drink Up!"</button>
         <hr>
         <!--added save cocktail button for local storage-->
         <input id="cocktailName" type="text">
         <button id="saveCocktailBtn">Save Cocktail</button>
+        
+      
 
 </div>
 <div class="row">
@@ -35,12 +37,12 @@
       </div>
       <div class="row">
           <h4 class="caret">Liquors</h4>
-          <div class="nested" id="liquor"></div>
+          <ul class="nested" id="liquor" style="list-style-type:none"></ul>
         
       </div>
       <div class="row">
         <h4 class="caret">Ingredients</h4>
-        <div class="nested" id="ingredients"></div>
+        <ul class="nested" id="ingredients" style="list-style-type:none"></ul>
       
     </div>
     </div>
