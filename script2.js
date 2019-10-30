@@ -1,21 +1,4 @@
 $(document).ready(function() {
-  //var item = localStorage.getItem("vrum");
-  //console.log(item);
-
-  //create local storage variable
-  var saveCocktailBtn = document.getElementById("saveCocktailBtn");
-  saveCocktailBtn.addEventListener("click", saveCocktailToStorage);
-
-  //create local storage function
-  function saveCocktailToStorage() {
-    var cocktailName = document.getElementById("cocktailName").value;
-    localStorage.setItem(cocktailName, JSON.stringify(drinks));
-    console.log("Saving cocktail " + cocktailName);
-    console.log(JSON.stringify(drinks));
-  }
-  //needed to create array to tie "what do you havve" to "drinks you can make"
-  var ingredientArray = [];
-  //list of incredients array
   var ingredientList = [
     "7-up",
     "Agave Syrup",
@@ -270,7 +253,6 @@ $(document).ready(function() {
     "Yeast",
     "Yoghurt"
   ];
-  //list of liquors array
   var liquorList = [
     "151 proof rum",
     "Absinthe",
@@ -486,72 +468,17 @@ $(document).ready(function() {
     "Zima"
   ];
 
-  //variable to have "drink up" moved to userChoice div
-  var drinks = "";
-
   function displayLiquor() {
     for (i = 0; i < liquorList.length; i++) {
       var liquorItem = liquorList[i];
-      $("#liquor").append(
-        `<li><input type="checkbox"><a>${liquorItem}</a></li>`
-      );
+      $("#liquor").append(`<input type="checkbox">${liquorItem}<br>`);
     }
   }
 
   function displayIngredients() {
     for (i = 0; i < ingredientList.length; i++) {
       var ingredientItem = ingredientList[i];
-      $("#ingredients").append(
-        `<li><input type="checkbox"><a>${ingredientItem}</a></li>`
-      );
-    }
-  }
-
-  // Run the filter functions as you type ingredients in the search bar
-  $("#userIngredient").keyup(function(e) {
-    if (e.keyCode === 13) {
-      var ingredient = $("#userIngredient").val();
-      searchDrink(ingredient);
-      $("#userIngredient").val("");
-    } else {
-      myLiquorFunction();
-      myIngredientFunction();
-    }
-  });
-
-  // Filter the liquor list based on your input in the search bar
-  function myLiquorFunction() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById("userIngredient");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("liquor");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-      a = li[i].getElementsByTagName("a")[0];
-      txtValue = a.textContent || a.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        li[i].style.display = "";
-      } else {
-        li[i].style.display = "none";
-      }
-    }
-  }
-
-  // Filter the ingredient list as you input text in the search bar
-  function myIngredientFunction() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById("userIngredient");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("ingredients");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-      a = li[i].getElementsByTagName("a")[0];
-      txtValue = a.textContent || a.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        li[i].style.display = "";
-      } else {
-        li[i].style.display = "none";
-      }
+      $("#ingredients").append(`<input type="checkbox">${ingredientItem}<br>`);
     }
   }
 
@@ -564,20 +491,16 @@ $(document).ready(function() {
       url: ingredientUrl,
       method: "GET"
     }).then(function(response) {
-      //console.log(response);
-      document.getElementById("drinkList").innerHTML = "";
-      //had to move var drinks to a global variable
-      drinks = response.drinks;
+      console.log(response);
+      var drinks = response.drinks;
       for (var i = 0; i < drinks.length; i++) {
         var drinkTitle = drinks[i].strDrink;
         // Creates an element to have the drink title displayed
         var drinkTitleDiv = $("<button>")
-          .addClass("displayBtn")
           .html(`${drinkTitle}`)
           .val(drinkTitle);
         // Displays the drink title
         $("#drinkList").append(drinkTitleDiv);
-        //Displays drink after clicking the cocktail name
         $(drinkTitleDiv).on("click", function() {
           console.log($(this).val());
           var cocktailName = $(this).val();
@@ -589,141 +512,57 @@ $(document).ready(function() {
             method: "GET"
           }).then(function(response) {
             console.log(response);
-            var ingrArray = [];
-            for (i = 1; i < 16; i++) {
-              var measIngr = {
-                ingredient: response.drinks[0][`strIngredient${i}`],
-                measurement: response.drinks[0][`strMeasure${i}`]
-              };
-              ingrArray.push(measIngr);
-            }
-
+            var ingredientArray = [
+              response.drinks[0].strIngredient1,
+              response.drinks[0].strIngredient2,
+              response.drinks[0].strIngredient3,
+              response.drinks[0].strIngredient4,
+              response.drinks[0].strIngredient5,
+              response.drinks[0].strIngredient6,
+              response.drinks[0].strIngredient7,
+              response.drinks[0].strIngredient8,
+              response.drinks[0].strIngredient9,
+              response.drinks[0].strIngredient10,
+              response.drinks[0].strIngredient11,
+              response.drinks[0].strIngredient12,
+              response.drinks[0].strIngredient13,
+              response.drinks[0].strIngredient14,
+              response.drinks[0].strIngredient15
+            ];
             // Creates an element to have the drink image displayed
             var drinkImageDiv = $("<img>")
-              .addClass("drinkImgClass")
               .attr("src", response.drinks[0].strDrinkThumb)
               .width(300);
-
-            var drinkIngredientDiv = $("<ul>").addClass("drinkIngClass");
-            ingrArray.forEach(ingredient => {
-              if (ingredient.ingredient !== null) {
+            var drinkIngredientDiv = $("<ul>");
+            ingredientArray.forEach(ingredient => {
+              if (ingredient !== null) {
                 var ingredientDiv = $("<li>");
-                var measurement =
-                  ingredient.measurement === null
-                    ? ""
-                    : ingredient.measurement + " : ";
-                // appends the drink recipe
-                ingredientDiv.html(`${measurement}${ingredient.ingredient}`);
+                ingredientDiv.html(ingredient);
                 drinkIngredientDiv.append(ingredientDiv);
               }
             });
+            var drinkInstructionsDiv = $("<div>").html(
+              response.drinks[0].strInstructions
+            );
 
-            var drinkInstructionsDiv = $("<div>")
-              .addClass("drinkInstClass")
-              .html(response.drinks[0].strInstructions);
-
-            // Displays the drink image, recipe, and instructions
+            // Displays the drink image
             $("#drinkDisplay")
-              .empty()
               .append(drinkImageDiv)
               .append(drinkIngredientDiv)
               .append(drinkInstructionsDiv);
           });
         });
-
-        // LOOK AT THIS!!!
-        var drinkImg = $("<img>").attr("src", drinks[i].strDrinkThumb);
-        $("strDrink").append(drinkImg);
       }
     });
   }
 
-  //pushes user choice to new div I created to display in "What do you have"
   $("#searchBtn").on("click", function() {
     var ingredient = $("#userIngredient").val();
-    if (ingredient != "") {
-      ingredientArray.push(ingredient);
 
-      var userChoice = document.getElementById("userChoice");
-      var userChoiceHtml = document.createElement("DIV");
-      //google fu said to use .id to solve error I was having
-      userChoiceHtml.id = ingredient + "_choice";
-      userChoice.appendChild(userChoiceHtml);
-
-      //needed to create label variable to have choice appear in div
-      var choiceLabel = document.createElement("LABEL");
-      choiceLabel.innerText = ingredient;
-      userChoiceHtml.appendChild(choiceLabel);
-
-      /*
-      var userChoiceHtml = '<div id="' + ingredient + '_choice">';
-      userChoiceHtml += "<label>" + ingredient + "</label>";
-      
-      userChoiceHtml +=
-        '<button id="' +
-        ingredient +
-        '_del" value="' +
-        ingredient +
-        '" onclick="deleteChoice(this.value)">del</button>';
-      userChoiceHtml += "</div>";
-      */
-
-      //userChoice.innerHTML += userChoiceHtml;
-
-      //variable to create delete button
-      var btn = document.createElement("BUTTON");
-      //had to change from innerHTML to innerText to get more than one delete button to work
-      btn.innerText = "Del";
-      btn.value = ingredient;
-      btn.id = ingredient + "_del";
-      //addEventListener is only deleting buttons that are last added.
-      btn.addEventListener("click", deleteChoice);
-      userChoiceHtml.appendChild(btn);
-
-      //searchDrink(ingredient);
-    }
-    //created array to reduce drink choices when more liquors and ingredients are selected
-    var ingredients = "";
-
-    //for loop to reduce drink choices provided by array as more ingredients are entered
-    for (i = 0; i < ingredientArray.length; i++) {
-      ingredients += ingredientArray[i];
-      if (i < ingredientArray.length - 1) {
-        ingredients += ",";
-      }
-    }
-    console.log(ingredients);
-
-    searchDrink(ingredients);
+    searchDrink(ingredient);
   });
   displayLiquor();
   displayIngredients();
-
-  //created function to have the ability to delete selected ingredients
-  function deleteChoice(event) {
-    //console.log(event.target.value);
-    //var delBtnId = event.target.id; NOTE: this is not working.
-    //stack overflow said to create event.target.value to identify object that led to event.
-    var delBtnValue = event.target.value;
-    document.getElementById(delBtnValue + "_choice").remove();
-    event.target.remove();
-
-    //NOTE: tutor recommended that I use indexOf and splice the index to get my for loop to work
-    var index = ingredientArray.indexOf(delBtnValue);
-    if (index > -1) {
-      ingredientArray.splice(index, 1);
-    }
-
-    var ingredients = "";
-
-    for (i = 0; i < ingredientArray.length; i++) {
-      ingredients += ingredientArray[i];
-      if (i < ingredientArray.length - 1) {
-        ingredients += ",";
-      }
-    }
-    searchDrink(ingredients);
-  }
 
   // Caret
   var toggler = document.getElementsByClassName("caret");
