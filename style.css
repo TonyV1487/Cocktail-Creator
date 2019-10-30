@@ -9,6 +9,50 @@ ul {
   margin-block-end: 0px;
 }
 
+.body {
+  font-family: 'Lobster', sans-serif;
+}
+
+.headline1 {
+  color: darkgray;
+  font-size: 85px;
+  text-shadow:
+   -2px -2px 0 #000,  
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+     2px 2px 0 #000;
+  text-align: center;
+}
+
+.headline2 {
+  font-size: 35px;
+  text-align: center;
+  text-shadow:
+  -1px -1px 0 #fff,  
+   1px -1px 0 #fff,
+   -1px 1px 0 #fff,
+    1px 1px 0 #fff;
+}
+
+.drinkImgClass{
+  border: 2px solid black;
+  align-content: center;
+  margin: 15px;
+}
+
+.drinkIngClass {
+  font-family: sans-serif;
+}
+
+.drinkInstClass {
+  font-family: sans-serif;
+  margin: 15px;
+}
+
+.search {
+  margin: 15px;
+}
+
 /* Create three equal columns that floats next to each other */
 .column {
   border: 1px solid black;
@@ -33,6 +77,12 @@ ul {
 .caret {
   cursor: pointer;
   user-select: none; /* Prevent text selection */
+  font-size: 20px;
+  text-shadow:
+  -1px -1px 0 #fff,  
+   1px -1px 0 #fff,
+   -1px 1px 0 #fff,
+    1px 1px 0 #fff;
 }
 
 /* Create the caret/arrow with a unicode, and style it */
@@ -51,9 +101,22 @@ ul {
 /* Hide the nested list */
 .nested {
   display: none;
+  font-family: sans-serif;
 }
 
 /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
 .active {
   display: block;
+}
+
+/* Display Button Style */
+.displayBtn {
+  background: rgb(79, 217, 153);
+  width:150px;
+  border-radius: 15px;
+  padding:5px;
+  margin:10px;
+  font-size:16px;
+  font-family: sans-serif;
+  color: black; 
 }

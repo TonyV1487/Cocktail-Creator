@@ -548,7 +548,7 @@ $(document).ready(function() {
       for (var i = 0; i < drinks.length; i++) {
         var drinkTitle = drinks[i].strDrink;
         // Creates an element to have the drink title displayed
-        var drinkTitleDiv = $("<button>")
+        var drinkTitleDiv = $("<button>").addClass('displayBtn')
           .html(`${drinkTitle}`)
           .val(drinkTitle);
         // Displays the drink title
@@ -574,10 +574,10 @@ $(document).ready(function() {
             }
 
             // Creates an element to have the drink image displayed
-            var drinkImageDiv = $("<img>")
+            var drinkImageDiv = $("<img>").addClass('drinkImgClass')
               .attr("src", response.drinks[0].strDrinkThumb)
               .width(300);
-            var drinkIngredientDiv = $("<ul>");
+            var drinkIngredientDiv = $("<ul>").addClass('drinkIngClass');
             ingrArray.forEach(ingredient => {
               if (ingredient.ingredient !== null) {
                 var ingredientDiv = $("<li>");
@@ -590,7 +590,7 @@ $(document).ready(function() {
                 drinkIngredientDiv.append(ingredientDiv);
               }
             });
-            var drinkInstructionsDiv = $("<div>").html(
+            var drinkInstructionsDiv = $("<div>").addClass('drinkInstClass').html(
               response.drinks[0].strInstructions
             );
 
