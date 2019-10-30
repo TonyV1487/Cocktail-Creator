@@ -641,10 +641,16 @@ $(document).ready(function() {
   //pushes user choice to new div I created to display in "What do you have"
   $('#searchBtn').on('click', function() {
     appendIngredientChoice();
+    saveCocktailToStorage();
   });
   function appendIngredientChoice() {
     var ingredient = $('#userIngredient').val();
-    if (ingredient != '') {
+    console.log(ingredient);
+    var ingredientUpCase = ingredient.toUpperCase();
+    if (
+      (ingredient != '' && liquorList.indexOf(ingredient) > -1) ||
+      (ingredient != '' && ingredientList.indexOf(ingredient) > -1)
+    ) {
       ingredientArray.push(ingredient);
 
       var userChoice = document.getElementById('userChoice');
@@ -684,6 +690,10 @@ $(document).ready(function() {
       userChoiceHtml.appendChild(btn);
 
       //searchDrink(ingredient);
+    } else {
+      alert(
+        'Not an available value or incorrectly capitalized. Try choosing from the checklist.'
+      );
     }
     //created array to reduce drink choices when more liquors and ingredients are selected
     var ingredients = '';
