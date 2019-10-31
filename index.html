@@ -7,61 +7,79 @@
     <link rel="stylesheet" type="text/css" href="./normalize.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
     <title>Cocktail Creator</title>
-    </head>
+</head>
 <body class="body">
-<!--Do we want a navigation bar?-->
-<!--Header-->
-<h1 class="headline1">Cocktail Creator<img src="https://image.flaticon.com/icons/svg/599/599956.svg" width="100" height="100"></h2>
-<h2 class="headline2"><em>What can you make with what you have?</em></h2>
-<!--User inputs ingredients here-->
-<div class="row userInput">
+<!--Logo-->
+    <div>
+        <img class="logo" src="https://image.flaticon.com/icons/svg/599/599956.svg" width="50" height="50"><h6 class="h6">Cocktail Creator</h6>
+    </div>
 
-        Ingredient:
-        <input class="search" id="userIngredient" type="text" placeholder="Search for ingredient.." title="Type in an ingredient">
-        <button id="searchBtn">"Drink Up!"</button>
+<!--Initial intro on page-->
+    <div class="bodyWrap" id="introWrap">  
+    <div>
+        <h1 class="introLine1">What can you make</h1>
+        <h1 class="introLine2">with what you have?</h1>
+        <p class="p1">Tell us what you've got on hand.</p>
+        <p class="p2">We can help you put together</p>
+        <p class="p3">the perfect cocktail.</p>
+    </div>
 
-        
-      
+<!--Button -->
+    <div class="svg-wrapper" id="begin">
+        <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+            <rect id="shape" height="40" width="150" />
+            <div id="textBtn">
+            <a><span class="spot"></span>Let's do it!</a>
+            </div>
+        </svg>
+    </div>
+    </div>
 
-</div>
-<div class="row">
-  <div class="inputWrapper">
-    <div class="column" id="myUL"style="background-color:#aaa;">
-      <h2>What do you have?</h2>
-      <div id="userChoice">
 
-      </div>
-      <div class="row">
-          <h4 class="caret">Liquors</h4>
-          <ul class="nested" id="liquor" style="list-style-type:none"></ul>
-        
-      </div>
-      <div class="row">
+<!--Columns-->
+    <div id="mainContent" class="mainColumns">
+
+ <!--Search Bar-->  
+    <div class="row userInput">
+        Search by ingredient:
+        <input class="search" id="userIngredient" type="text" placeholder="Pineapple, Rum" title="Type in an ingredient">
+        <button id="searchBtn">Search</button>
+    </div>
+            
+    <div class="row">
+    <div class="inputWrapper">
+    <div class="column1" id="myUL">
+        <h2 class="h2">What do you have?</h2>
+    <div id="userChoice">
+    <div class="row">
+        <h4 class="caret">Liquors</h4>
+        <ul class="nested" id="liquor" style="list-style-type:none"></ul>   
+    </div>
+    <div class="row">
         <h4 class="caret">Ingredients</h4>
         <ul class="nested" id="ingredients" style="list-style-type:none"></ul>
-      
+    </div>
+    </div>
+    </div>
+    </div>
+  <!--Cocktail recipes pop up here-->
+    <div class="suggestWrapper">
+    <div class="column2">
+        <h2 class="h2">Drinks you can make:</h2>
+            <p id="drinkList"></p>
+    </div>
+    </div>
+  <!--More ingredients for more drinks here-->
+    <div class="moreIngredientsWrapper" id="recipeDiv">
+    <div class="column3">
+        <h2 class="h2">Here's the recipe:</h2>
+            <p id="drinkDisplay"></p>
     </div>
     </div>
   </div>
-<!--Cocktail recipes pop up here-->
-  <div class="suggestWrapper">
-    <div class="column" style="background-color:#bbb;">
-      <h2 class="headline2">Drinks you can make:</h2>
-      <p id="drinkList"></p>
-    </div>
   </div>
-<!--More ingredients for more drinks here-->
-  <div class="moreIngredientsWrapper">
-    <div class="column" style="background-color:#ccc;">
-      <h2 class="headline2">Here's the recipe:</h2>
-      <p id="drinkDisplay"></p>
-    </div>
-  </div>
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
