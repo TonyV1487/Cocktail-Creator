@@ -2,6 +2,12 @@ $(document).ready(function() {
   //var item = localStorage.getItem("vrum");
   //console.log(item);
 
+  $('#mainContent').hide();
+  $('.svg-wrapper').bind('click', function(event){
+      $('#introWrap').hide(1000);
+      $('#mainContent').show(1200);
+  });
+
   //create local storage variable
   var saveCocktailBtn = document.getElementById('userIngredient');
   saveCocktailBtn.addEventListener('click', searchBtn);
@@ -686,6 +692,7 @@ $(document).ready(function() {
 
       //variable to create delete button
       var btn = document.createElement('BUTTON');
+      btn.classList.add("deleteBtn");
       //had to change from innerHTML to innerText to get more than one delete button to work
       btn.innerText = 'Del';
       btn.value = ingredient;
