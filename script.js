@@ -4,8 +4,8 @@ $(document).ready(function() {
 
   $('#mainContent').hide();
   $('.svg-wrapper').bind('click', function(event) {
-    $('#introWrap').hide(1000);
-    $('#mainContent').show(1200);
+    $('#introWrap').hide(400);
+    $('#mainContent').fadeIn(400);
   });
 
   //create local storage variable
