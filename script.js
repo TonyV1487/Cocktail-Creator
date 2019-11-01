@@ -3,22 +3,15 @@ $(document).ready(function() {
   //console.log(item);
 
   $('#mainContent').hide();
-  $('.svg-wrapper').bind('click', function(event){
-      $('#introWrap').hide(1000);
-      $('#mainContent').show(1200);
+  $('.svg-wrapper').bind('click', function(event) {
+    $('#introWrap').hide(1000);
+    $('#mainContent').show(1200);
   });
 
   //create local storage variable
   var saveCocktailBtn = document.getElementById('userIngredient');
   saveCocktailBtn.addEventListener('click', searchBtn);
 
-  //create local storage function
-  function saveCocktailToStorage() {
-    var cocktailSave = document.getElementById('userIngredient').value;
-    localStorage.setItem(cocktailSave, JSON.stringify(drinks));
-    console.log('Saving cocktail ' + cocktailSave);
-    console.log(JSON.stringify(drinks));
-  }
   //needed to create array to tie "what do you havve" to "drinks you can make"
   var ingredientArray = [];
   //list of incredients array
@@ -499,7 +492,7 @@ $(document).ready(function() {
     for (i = 0; i < liquorList.length; i++) {
       var liquorItem = liquorList[i];
       $('#liquor').append(
-        `<li><input type="checkbox"><a>${liquorItem}</a></li>`
+        `<li><input type="checkbox" data-index="${liquorItem}"><a>${liquorItem}</a></li>`
       );
     }
   }
@@ -508,7 +501,7 @@ $(document).ready(function() {
     for (i = 0; i < ingredientList.length; i++) {
       var ingredientItem = ingredientList[i];
       $('#ingredients').append(
-        `<li><input type="checkbox"><a>${ingredientItem}</a></li>`
+        `<li><input class="target" type="checkbox" data-index="${ingredientItem}"><a>${ingredientItem}</a></li>`
       );
     }
   }
@@ -518,7 +511,7 @@ $(document).ready(function() {
     if (e.keyCode === 13) {
       var ingredient = $('#userIngredient').val();
       searchDrink(ingredient);
-      appendIngredientChoice();
+      appendIngredientChoice(ingredient);
       $('#userIngredient').val('');
     } else {
       myLiquorFunction();
@@ -651,11 +644,11 @@ $(document).ready(function() {
 
   //pushes user choice to new div I created to display in "What do you have"
   $('#searchBtn').on('click', function() {
-    appendIngredientChoice();
-    saveCocktailToStorage();
+    appendIngredientChoice($('#userIngredient').val());
+    $('#userIngredient').val('');
   });
-  function appendIngredientChoice() {
-    var ingredient = $('#userIngredient').val();
+  function appendIngredientChoice(ingredient) {
+    // var ingredient = $('#userIngredient').val();
     console.log(ingredient);
     var ingredientUpCase = ingredient.toUpperCase();
     if (
@@ -692,7 +685,7 @@ $(document).ready(function() {
 
       //variable to create delete button
       var btn = document.createElement('BUTTON');
-      btn.classList.add("deleteBtn");
+      btn.classList.add('deleteBtn');
       //had to change from innerHTML to innerText to get more than one delete button to work
       btn.innerText = 'Del';
       btn.value = ingredient;
@@ -750,6 +743,17 @@ $(document).ready(function() {
     }
     searchDrink(ingredients);
   }
+
+  // function selectCheckboxChoice(){
+  //   a = li[i].getElementsByTagName('a')[0];
+  //     txtValue = a.textContent || a.innerText;
+  // }
+
+  $('li input').on('click', function() {
+    alert($(this).data('index'));
+    var selection = $(this).data('index');
+    appendIngredientChoice(selection);
+  });
 
   // Caret
   var toggler = document.getElementsByClassName('caret');
