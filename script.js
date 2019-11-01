@@ -750,7 +750,6 @@ $(document).ready(function() {
   // }
 
   $('li input').on('click', function() {
-    alert($(this).data('index'));
     var selection = $(this).data('index');
     appendIngredientChoice(selection);
   });
